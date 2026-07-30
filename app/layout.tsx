@@ -1,11 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
+import { Bebas_Neue, IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const bebasNeue = Bebas_Neue({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "400",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -17,11 +23,11 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://basementboys.org"),
   title: {
-    default: "Basement Boys — A Dev Group for Fun",
+    default: "Basement Boys — Open Source for Fun",
     template: "%s — Basement Boys",
   },
   description:
-    "A loose dev group making weird little tools, internet experiments, and side projects for fun.",
+    "Open-source tools, experiments, and reference projects from the Basement Boys dev group.",
   icons: {
     icon: [
       { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
@@ -30,25 +36,25 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Basement Boys — A Dev Group for Fun",
+    title: "Basement Boys — Open Source for Fun",
     description:
-      "Weird little tools, internet experiments, and side projects made for fun.",
+      "Open-source tools, experiments, and reference projects worth reading, running, and remixing.",
     url: "https://basementboys.org/",
     siteName: "Basement Boys",
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Basement Boys — A Dev Group for Fun",
+    title: "Basement Boys — Open Source for Fun",
     description:
-      "Weird little tools, internet experiments, and side projects made for fun.",
+      "Open-source tools, experiments, and reference projects worth reading, running, and remixing.",
   },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ecebe6",
+  themeColor: "#f05a24",
   colorScheme: "light",
 };
 
@@ -59,7 +65,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.variable} ${ibmPlexMono.variable}`}>
+      <body
+        className={`${bebasNeue.variable} ${spaceGrotesk.variable} ${ibmPlexMono.variable}`}
+      >
         {children}
       </body>
     </html>

@@ -1,243 +1,195 @@
 const projects = [
   {
-    number: "01",
-    color: "orange",
-    status: "Playable",
-    title: "The browser obstacle course",
-    copy: "A harmless little corner of the web where browser agents can practice finding things without buying, deleting, or breaking anything.",
-    tags: ["agents", "selectors", "tiny web"],
+    id: "OSS-001",
+    title: "Robotics Sandbox",
+    type: "Node / JavaScript",
+    status: "MIT",
+    href: "https://github.com/ChristFollower873461/robotics-sandbox-spec",
+    copy: "A small, readable foundation for 2-DOF robot-arm kinematics, waypoint planning, obstacle checks, and repeatable scenarios—with zero runtime dependencies.",
   },
   {
-    number: "02",
-    color: "blue",
-    status: "Useful-ish",
-    title: "Metadata that talks back",
-    copy: "Robots, sitemaps, semantic HTML, and an agent card—all agreeing with each other for once.",
-    tags: ["metadata", "web", "open"],
+    id: "OSS-002",
+    title: "CodexVault",
+    type: "Rust / Tauri / React",
+    status: "MIT",
+    href: "https://github.com/ChristFollower873461/codexvault",
+    copy: "A local-first encrypted vault for AI-provider credentials, built around Argon2id, AES-256-GCM, deliberate exports, and an honest security boundary.",
   },
   {
-    number: "03",
-    color: "yellow",
-    status: "Always",
-    title: "Weekend-sized experiments",
-    copy: "The kind of idea that starts with “how hard could it be?” and ends with a suspicious number of open tabs.",
-    tags: ["prototypes", "tools", "fun"],
-  },
-  {
-    number: "04",
-    color: "pink",
-    status: "Unannounced",
-    title: "The next dumb idea",
-    copy: "Currently an empty folder with an excellent name. Give it a minute.",
-    tags: ["???", "soon-ish", "probably"],
+    id: "OSS-003",
+    title: "K² Inspections",
+    type: "HTML / CSS / Cloudflare",
+    status: "MIT",
+    href: "https://github.com/ChristFollower873461/k2-inspections",
+    copy: "The public source for a production static marketing site: service pages, lead capture, crawl metadata, edge configuration, and a tiny verification suite.",
   },
 ];
 
-const process = [
-  ["01", "Somebody says “what if…”"],
-  ["02", "A repo mysteriously appears"],
-  ["03", "It works on at least one machine"],
-  ["04", "We ship it—or learn something funny"],
+const rules = [
+  ["01", "Build the small version."],
+  ["02", "Document the sharp edges."],
+  ["03", "License it clearly."],
+  ["04", "Keep it fun."],
 ];
 
-const endpoints = [
-  ["/robots.txt", "House rules for robots"],
-  ["/sitemap.xml", "A very small map"],
-  ["/.well-known/agent.json", "The machine-readable hello"],
+const machineRoutes = [
+  ["/robots.txt", "ROBOTS"],
+  ["/sitemap.xml", "SITEMAP"],
+  ["/.well-known/agent.json", "AGENT JSON"],
 ];
 
 export default function Home() {
   return (
     <main className="site-shell">
       <a className="skip-link" href="#main">
-        Skip to the fun stuff
+        Skip to main content
       </a>
 
       <header className="site-header" data-agent="navigation">
-        <a className="wordmark" href="#top" aria-label="Basement Boys home">
-          <span className="wordmark-mark" aria-hidden="true">
-            BB
-          </span>
-          <span>Basement Boys</span>
+        <a className="header-name" href="#top" aria-label="Basement Boys home">
+          Basement Boys
         </a>
+        <p>Dev group / for fun</p>
         <nav aria-label="Primary navigation">
-          <a href="#projects">Stuff we make</a>
-          <a href="#about">What is this?</a>
-          <a href="#robots">Robot shelf</a>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#machine">Machine stuff</a>
         </nav>
-        <span className="header-status">
-          <i aria-hidden="true" />
-          Probably coding
-        </span>
       </header>
 
-      <section className="hero section-frame" id="top">
-        <div className="hero-copy" id="main" data-agent="site-summary">
-          <p className="eyebrow">
-            <span aria-hidden="true">↳</span> A tiny dev group
-          </p>
+      <section className="hero" id="top" data-agent="site-summary">
+        <div className="hero-utility">
+          <span>BB / HOME</span>
+          <span>EST. WHENEVER</span>
+          <span className="online">
+            <i aria-hidden="true" /> ONLINE, PROBABLY
+          </span>
+        </div>
+
+        <div className="hero-title" id="main">
           <h1 data-agent="name">
-            We make stuff
-            <br />
-            because it sounds
-            <br />
-            <mark>fun.</mark>
+            <span>Basement</span>
+            <span>Boys</span>
           </h1>
-          <p className="hero-lede" data-agent="about">
-            Basement Boys is a loose group of developers building weird little
-            tools, internet experiments, and side projects together. No grand
-            thesis. We just like making things.
-          </p>
-          <div className="hero-actions">
-            <a className="button button-dark" href="#projects">
-              See what we’re making <span aria-hidden="true">↓</span>
-            </a>
-            <span className="hand-note" aria-label="Seriously, that is the whole idea">
-              seriously, that&apos;s the whole idea ↗
-            </span>
+          <div className="hero-stamp" aria-label="Basement Boys mark">
+            <img src="/logo.svg" alt="" width="830" height="680" />
           </div>
         </div>
 
-        <div className="hero-board" aria-label="Basement Boys status board">
-          <article className="board-card logo-card">
-            <span className="card-label">Club emblem / v1-ish</span>
-            <img src="/logo.svg" alt="" width="830" height="680" />
-          </article>
-
-          <article className="board-card terminal-card">
-            <div className="terminal-bar">
-              <span />
-              <span />
-              <span />
-              <b>basement.sh</b>
-            </div>
-            <pre>
-              <code>
-                <span>$ basement-boys --status</span>
-                {"\n"}→ making something
-                {"\n"}→ overthinking the name
-                {"\n"}→ having fun anyway
-                {"\n"}
-                <strong>✓ good enough to ship</strong>
-              </code>
-            </pre>
-          </article>
-
-          <article className="board-card sticky-card">
-            <span>NO ROADMAP</span>
-            <strong>GOOD IDEAS WELCOME</strong>
-            <small>bad ideas too, honestly</small>
-          </article>
-
-          <article className="board-card tiny-card">
-            <span className="pixel-face" aria-hidden="true">
-              [ ^‿^ ]
-            </span>
-            <p>works on localhost</p>
-          </article>
+        <div className="hero-bottom">
+          <h2>We build software for no good reason. Then we open the source.</h2>
+          <p data-agent="about">
+            Basement Boys is a loose dev group making readable tools,
+            experiments, and reference projects that other people can inspect,
+            run, fork, and improve.
+          </p>
+          <a href="#projects">
+            Browse open source <span aria-hidden="true">↓</span>
+          </a>
         </div>
       </section>
 
-      <div className="ticker" aria-label="Basement Boys principles">
-        <span>No pitch deck</span>
-        <i aria-hidden="true">✦</i>
-        <span>No dress code</span>
-        <i aria-hidden="true">✦</i>
-        <span>Too many tabs</span>
-        <i aria-hidden="true">✦</i>
-        <span>Ship the funny version</span>
+      <div className="stats-bar" aria-label="Basement Boys statistics">
+        <span>03 featured repos</span>
+        <span>MIT licensed</span>
+        <span>Rust + JS + static</span>
+        <span>Source in public</span>
       </div>
 
-      <section className="about-section section-frame" id="about">
-        <div className="section-tag">What is this?</div>
-        <div className="about-statement">
-          <h2>
-            Not a startup.
-            <br />
-            Not an agency.
-            <br />
-            <span>Just the group chat with a Git repo.</span>
-          </h2>
-        </div>
-        <div className="about-note">
-          <span className="tape" aria-hidden="true" />
+      <section className="about section-frame" id="about">
+        <div className="file-label">[ ABOUT.TXT ]</div>
+        <div className="about-main">
+          <h2>A dev group with the source open.</h2>
           <p>
-            We build things for ourselves, our friends, and the occasional
-            curious robot. Some become real projects. Some become good stories.
-            Both count.
+            Basement Boys is where we put projects worth reading—not just
+            screenshots worth scrolling past. The code, architecture, limits,
+            and setup instructions are part of the work.
           </p>
         </div>
+        <aside className="about-aside">
+          <p>READ IT</p>
+          <p>RUN IT</p>
+          <p>REMIX IT</p>
+          <strong>SEND A PATCH.</strong>
+        </aside>
       </section>
 
-      <section className="projects-section" id="projects" data-agent="topics">
-        <div className="projects-heading section-frame">
+      <section className="projects" id="projects" data-agent="topics">
+        <div className="projects-header section-frame">
           <div>
-            <p className="eyebrow">Open tabs / current edition</p>
-            <h2>Stuff from the basement</h2>
+            <span className="file-label">[ INDEX / CURRENT ]</span>
+            <h2>Repo pile</h2>
           </div>
           <p>
-            A rotating shelf of experiments. None of this is a product roadmap,
-            which is convenient because we do not have one.
+            Public repositories with enough documentation to understand what
+            they do, how they work, and where the sharp edges are.
           </p>
         </div>
 
-        <div className="project-grid section-frame">
+        <div className="project-list">
+          <div className="project-columns section-frame" aria-hidden="true">
+            <span>ID</span>
+            <span>Project</span>
+            <span>Stack</span>
+            <span>Source</span>
+          </div>
           {projects.map((project) => (
-            <article
-              className={`project-card project-card-${project.color}`}
-              key={project.number}
-            >
-              <div className="project-topline">
-                <span>{project.number}</span>
-                <span>{project.status}</span>
+            <article className="project-row" key={project.id}>
+              <div className="project-row-inner section-frame">
+                <span className="project-id">{project.id}</span>
+                <div className="project-name">
+                  <h3>{project.title}</h3>
+                  <p>{project.copy}</p>
+                </div>
+                <span className="project-type">{project.type}</span>
+                <a
+                  className="project-source"
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`View ${project.title} source on GitHub`}
+                >
+                  {project.status} / GitHub <span aria-hidden="true">↗</span>
+                </a>
               </div>
-              <div>
-                <h3>{project.title}</h3>
-                <p>{project.copy}</p>
-              </div>
-              <ul aria-label={`${project.title} tags`}>
-                {project.tags.map((tag) => (
-                  <li key={tag}>{tag}</li>
-                ))}
-              </ul>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="process-section section-frame">
-        <div className="process-copy">
-          <p className="eyebrow">Our very serious process</p>
-          <h2>Low ceremony. High curiosity.</h2>
-          <p>
-            Small enough to start tonight. Loose enough to change tomorrow.
-          </p>
+      <section className="rules">
+        <div className="rules-intro section-frame">
+          <span className="file-label">[ PROCESS.MD ]</span>
+          <p>Open source should be useful before it is impressive.</p>
         </div>
-        <ol className="process-list">
-          {process.map(([number, copy]) => (
+        <ol>
+          {rules.map(([number, copy]) => (
             <li key={number}>
-              <span>{number}</span>
-              <p>{copy}</p>
+              <div className="section-frame">
+                <span>{number}</span>
+                <p>{copy}</p>
+              </div>
             </li>
           ))}
         </ol>
       </section>
 
-      <section className="robots-section" id="robots">
-        <div className="robots-inner section-frame">
-          <div className="robot-copy">
-            <p className="eyebrow">A shelf for robots</p>
-            <h2>Humans get the jokes. Machines get clean metadata.</h2>
+      <section className="machine" id="machine">
+        <div className="machine-inner section-frame">
+          <div className="machine-copy">
+            <span className="file-label">[ FOR ROBOTS ]</span>
+            <h2>Clean metadata. Weird humans.</h2>
             <p>
-              The site is still a safe, read-only playground for browser-agent
-              experiments. That is one thing we make—not the whole personality.
+              The project index is readable by people and machines. These
+              routes expose the site map and safety boundaries without hiding
+              the useful part behind a JavaScript app.
             </p>
           </div>
-          <div className="endpoint-list">
-            {endpoints.map(([path, label]) => (
+          <div className="route-list">
+            {machineRoutes.map(([path, label]) => (
               <a href={path} key={path}>
-                <code>GET {path}</code>
                 <span>{label}</span>
+                <code>GET {path}</code>
                 <b aria-hidden="true">↗</b>
               </a>
             ))}
@@ -246,18 +198,17 @@ export default function Home() {
       </section>
 
       <footer className="site-footer section-frame">
-        <div className="footer-lockup">
-          <span className="wordmark-mark" aria-hidden="true">
-            BB
-          </span>
-          <div>
-            <strong>Basement Boys</strong>
-            <span>A dev group for fun.</span>
-          </div>
+        <div>
+          <strong>BASEMENT BOYS</strong>
+          <span>DEV GROUP / FOR FUN</span>
         </div>
-        <p>Made downstairs with questionable estimates.</p>
-        <a href="#top">
-          Back upstairs <span aria-hidden="true">↑</span>
+        <p>MADE DOWNSTAIRS. ESTIMATES NOT INCLUDED.</p>
+        <a
+          href="https://github.com/ChristFollower873461"
+          target="_blank"
+          rel="noreferrer"
+        >
+          GITHUB <span aria-hidden="true">↗</span>
         </a>
       </footer>
     </main>

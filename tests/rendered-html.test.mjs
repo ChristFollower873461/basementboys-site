@@ -29,14 +29,19 @@ test("server-renders the finished Basement Boys homepage", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Basement Boys — A Dev Group for Fun<\/title>/i);
-  assert.match(html, /We make stuff/);
-  assert.match(html, /because it sounds/);
-  assert.match(html, /Just the group chat with a Git repo\./);
-  assert.match(html, /Stuff from the basement/);
+  assert.match(html, /<title>Basement Boys — Open Source for Fun<\/title>/i);
+  assert.match(html, /Then we open the source\./);
+  assert.match(html, /A dev group with the source open\./);
+  assert.match(html, /Repo pile/);
+  assert.match(html, /Robotics Sandbox/);
+  assert.match(html, /CodexVault/);
+  assert.match(html, /K² Inspections/);
+  assert.match(html, /License it clearly\./);
+  assert.match(html, /github\.com\/ChristFollower873461\/robotics-sandbox-spec/);
   assert.match(html, /data-agent="site-summary"/);
   assert.match(html, /\/\.well-known\/agent\.json/);
   assert.doesNotMatch(html, /Drip Council/i);
+  assert.doesNotMatch(html, /workbench|pitch deck/i);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 

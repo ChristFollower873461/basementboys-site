@@ -1,7 +1,7 @@
 {
   "name": "Basement Boys",
   "url": "https://basementboys.org/",
-  "description": "A playful dev-group homepage with a small, public, read-only obstacle course for browser-agent experiments.",
+  "description": "An open-source project index for the Basement Boys dev group, plus a small public read-only surface for browser-agent experiments.",
   "safety": {
     "authentication": false,
     "payments": false,
