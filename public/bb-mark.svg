@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Basement Boys mark</title>
+  <desc id="desc">A below-ground terminal window with descending steps and a prompt.</desc>
+  <g fill="none" stroke="#11110f" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M12 34h136" stroke-width="12"/>
+    <path d="M28 54v88h104V54" stroke-width="10"/>
+    <path d="M43 68h19v20h19v20h19v20" stroke-width="11"/>
+    <path d="m103 66 18 14-18 14M102 116h22" stroke-width="9"/>
+  </g>
+</svg>

@@ -84,8 +84,16 @@ a {
 
 .header-name {
   width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
   font-weight: 600;
   text-decoration: none;
+}
+
+.header-name img {
+  width: 21px;
+  height: 21px;
 }
 
 .site-header > p {
@@ -185,10 +193,9 @@ a {
 }
 
 .hero-stamp img {
-  width: min(100%, 440px);
+  width: min(66%, 280px);
   height: auto;
-  filter: brightness(0);
-  transform: rotate(-4deg);
+  transform: rotate(-2deg);
 }
 
 .hero-bottom {
@@ -689,7 +696,7 @@ a:focus-visible {
   }
 
   .hero-stamp img {
-    width: 210px;
+    width: 140px;
   }
 
   .hero-bottom {

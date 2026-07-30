@@ -5,23 +5,23 @@ const projects = [
     type: "Node / JavaScript",
     status: "MIT",
     href: "https://github.com/ChristFollower873461/robotics-sandbox-spec",
-    copy: "A small, readable foundation for 2-DOF robot-arm kinematics, waypoint planning, obstacle checks, and repeatable scenarios—with zero runtime dependencies.",
+    copy: "An interactive, dependency-free 2-DOF arm simulator with draggable IK targets, waypoint playback, workspace bounds, and live collision telemetry.",
   },
   {
     id: "OSS-002",
+    title: "Drip Council",
+    type: "JS / Rust / Python",
+    status: "MIT",
+    href: "https://github.com/ChristFollower873461/dripcouncil",
+    copy: "A public browser-agent field lab with inspectable cases, a Python observatory lens, and a real Rust/WebAssembly boundary validator.",
+  },
+  {
+    id: "OSS-003",
     title: "CodexVault",
     type: "Rust / Tauri / React",
     status: "MIT",
     href: "https://github.com/ChristFollower873461/codexvault",
     copy: "A local-first encrypted vault for AI-provider credentials, built around Argon2id, AES-256-GCM, deliberate exports, and an honest security boundary.",
-  },
-  {
-    id: "OSS-003",
-    title: "K² Inspections",
-    type: "HTML / CSS / Cloudflare",
-    status: "MIT",
-    href: "https://github.com/ChristFollower873461/k2-inspections",
-    copy: "The public source for a production static marketing site: service pages, lead capture, crawl metadata, edge configuration, and a tiny verification suite.",
   },
 ];
 
@@ -47,7 +47,8 @@ export default function Home() {
 
       <header className="site-header" data-agent="navigation">
         <a className="header-name" href="#top" aria-label="Basement Boys home">
-          Basement Boys
+          <img src="/bb-mark.svg" alt="" width="22" height="22" />
+          <span>Basement Boys</span>
         </a>
         <p>Dev group / for fun</p>
         <nav aria-label="Primary navigation">
@@ -72,7 +73,7 @@ export default function Home() {
             <span>Boys</span>
           </h1>
           <div className="hero-stamp" aria-label="Basement Boys mark">
-            <img src="/logo.svg" alt="" width="830" height="680" />
+            <img src="/bb-mark.svg" alt="" width="160" height="160" />
           </div>
         </div>
 
@@ -92,7 +93,7 @@ export default function Home() {
       <div className="stats-bar" aria-label="Basement Boys statistics">
         <span>03 featured repos</span>
         <span>MIT licensed</span>
-        <span>Rust + JS + static</span>
+        <span>Rust + JS + Python</span>
         <span>Source in public</span>
       </div>
 
