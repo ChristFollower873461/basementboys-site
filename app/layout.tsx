@@ -17,11 +17,11 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://basementboys.org"),
   title: {
-    default: "Basement Boys — Definitely Have Opinions",
+    default: "Basement Boys — A Dev Group for Fun",
     template: "%s — Basement Boys",
   },
   description:
-    "A public lab for small experiments, safe web-agent obstacle courses, and ideas worth testing before they get expensive.",
+    "A loose dev group making weird little tools, internet experiments, and side projects for fun.",
   icons: {
     icon: [
       { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
@@ -30,35 +30,26 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Basement Boys — Definitely Have Opinions",
+    title: "Basement Boys — A Dev Group for Fun",
     description:
-      "Small experiments, safe surfaces, and web-agent dogfooding.",
+      "Weird little tools, internet experiments, and side projects made for fun.",
     url: "https://basementboys.org/",
     siteName: "Basement Boys",
     type: "website",
-    images: [
-      {
-        url: "/og.png",
-        width: 1731,
-        height: 909,
-        alt: "Basement Boys — Definitely Have Opinions",
-      },
-    ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Basement Boys — Definitely Have Opinions",
+    card: "summary",
+    title: "Basement Boys — A Dev Group for Fun",
     description:
-      "Small experiments, safe surfaces, and web-agent dogfooding.",
-    images: ["/og.png"],
+      "Weird little tools, internet experiments, and side projects made for fun.",
   },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#071127",
-  colorScheme: "dark",
+  themeColor: "#ecebe6",
+  colorScheme: "light",
 };
 
 export default function RootLayout({

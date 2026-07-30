@@ -1,13 +1,12 @@
 {
   "name": "Basement Boys",
   "url": "https://basementboys.org/",
-  "description": "A public, low-risk obstacle course for agent-readable metadata, selectors, and navigation.",
+  "description": "A playful dev-group homepage with a small, public, read-only obstacle course for browser-agent experiments.",
   "safety": {
     "authentication": false,
     "payments": false,
     "destructive_workflows": false,
-    "automated_write_endpoint": false,
-    "contact_form_behavior": "local_demo_only"
+    "automated_write_endpoint": false
   },
   "public_routes": [
     "/",
