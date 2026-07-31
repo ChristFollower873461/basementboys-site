@@ -34,7 +34,8 @@ npm run deploy:cloudflare
 ```
 
 That command verifies the application, uploads the built Worker and assets to
-Cloudflare, and binds the production custom domain `basementboys.org`.
+Cloudflare, and binds the `basementboys.org/*` production route. The route
+intentionally preserves the zone's existing proxied apex DNS record.
 
 ## Hosting rule
 
