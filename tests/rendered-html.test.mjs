@@ -39,12 +39,14 @@ test("server-renders the finished Basement Boys homepage", async () => {
   assert.match(html, /03 featured repos/);
   assert.match(html, /License it clearly\./);
   assert.match(html, /github\.com\/ChristFollower873461\/robotics-sandbox-spec/);
+  assert.match(html, /https:\/\/robotics\.basementboys\.org/);
+  assert.match(html, /source-backed robot decision workbench/i);
   assert.match(html, /github\.com\/ChristFollower873461\/dripcouncil/);
   assert.match(html, /\/bb-mark\.svg/);
   assert.doesNotMatch(html, /src="\/logo\.svg"/);
   assert.match(html, /data-agent="site-summary"/);
   assert.match(html, /\/\.well-known\/agent\.json/);
-  assert.doesNotMatch(html, /workbench|pitch deck/i);
+  assert.doesNotMatch(html, /pitch deck/i);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
 });
 

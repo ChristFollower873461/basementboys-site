@@ -4,15 +4,17 @@ const projects = [
     title: "Robotics Sandbox",
     type: "Node / JavaScript",
     status: "MIT",
-    href: "https://github.com/ChristFollower873461/robotics-sandbox-spec",
-    copy: "An interactive, dependency-free 2-DOF arm simulator with draggable IK targets, waypoint playback, workspace bounds, and live collision telemetry.",
+    sourceHref: "https://github.com/ChristFollower873461/robotics-sandbox-spec",
+    liveHref: "https://robotics.basementboys.org",
+    copy: "A source-backed robot decision workbench for screening arms, humanoids, quadrupeds, and drones—plus a transparent planar motion lab for the candidates it can honestly model.",
   },
   {
     id: "OSS-002",
     title: "Drip Council",
     type: "JS / Rust / Python",
     status: "MIT",
-    href: "https://github.com/ChristFollower873461/dripcouncil",
+    sourceHref: "https://github.com/ChristFollower873461/dripcouncil",
+    liveHref: null,
     copy: "A public browser-agent field lab with inspectable cases, a Python observatory lens, and a real Rust/WebAssembly boundary validator.",
   },
   {
@@ -20,7 +22,8 @@ const projects = [
     title: "CodexVault",
     type: "Rust / Tauri / React",
     status: "MIT",
-    href: "https://github.com/ChristFollower873461/codexvault",
+    sourceHref: "https://github.com/ChristFollower873461/codexvault",
+    liveHref: null,
     copy: "A local-first encrypted vault for AI-provider credentials, built around Argon2id, AES-256-GCM, deliberate exports, and an honest security boundary.",
   },
 ];
@@ -132,7 +135,7 @@ export default function Home() {
             <span>ID</span>
             <span>Project</span>
             <span>Stack</span>
-            <span>Source</span>
+            <span>Links</span>
           </div>
           {projects.map((project) => (
             <article className="project-row" key={project.id}>
@@ -143,15 +146,28 @@ export default function Home() {
                   <p>{project.copy}</p>
                 </div>
                 <span className="project-type">{project.type}</span>
-                <a
-                  className="project-source"
-                  href={project.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`View ${project.title} source on GitHub`}
-                >
-                  {project.status} / GitHub <span aria-hidden="true">↗</span>
-                </a>
+                <div className="project-links">
+                  {project.liveHref ? (
+                    <a
+                      className="project-source project-live"
+                      href={project.liveHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Open the live ${project.title}`}
+                    >
+                      Live <span aria-hidden="true">↗</span>
+                    </a>
+                  ) : null}
+                  <a
+                    className="project-source"
+                    href={project.sourceHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`View ${project.title} source on GitHub`}
+                  >
+                    {project.status} / GitHub <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
               </div>
             </article>
           ))}

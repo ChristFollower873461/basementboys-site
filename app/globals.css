@@ -403,7 +403,8 @@ a {
 
 .project-id,
 .project-type,
-.project-source {
+.project-source,
+.project-links {
   font-family: var(--font-mono), monospace;
   font-size: 10px;
   letter-spacing: 0.05em;
@@ -432,6 +433,11 @@ a {
   color: #aaa69b;
 }
 
+.project-links {
+  display: grid;
+  gap: 8px;
+}
+
 .project-source {
   display: inline-flex;
   align-items: center;
@@ -440,6 +446,17 @@ a {
   min-height: 44px;
   color: inherit;
   text-underline-offset: 5px;
+}
+
+.project-live {
+  padding: 10px 12px;
+  background: var(--signal);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.project-row:hover .project-live {
+  color: var(--ink);
 }
 
 .project-source:hover,
@@ -761,7 +778,7 @@ a:focus-visible {
     grid-row: 2;
   }
 
-  .project-source {
+  .project-links {
     justify-self: end;
   }
 
