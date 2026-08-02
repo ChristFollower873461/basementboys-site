@@ -26,6 +26,14 @@ const projects = [
     liveHref: "https://vault.basementboys.org",
     copy: "A local-first encrypted vault for AI-provider credentials, with a safe browser walkthrough, deterministic exports, and an honest desktop security boundary.",
   },
+  {
+    id: "OSS-004",
+    title: "Pjario Staltman",
+    type: "Python / Make / Markdown",
+    status: "MIT",
+    sourceHref: "https://github.com/ChristFollower873461/pjario-staltman",
+    copy: "A small operating system for agent-built software: scoped tickets, planning briefs, auditable proof, staff review, and a bundled frontend-quality profile.",
+  },
 ];
 
 const rules = [
@@ -94,7 +102,7 @@ export default function Home() {
       </section>
 
       <div className="stats-bar" aria-label="Basement Boys statistics">
-        <span>03 featured repos</span>
+        <span>04 featured repos</span>
         <span>MIT licensed</span>
         <span>Rust + JS + Python</span>
         <span>Source in public</span>
