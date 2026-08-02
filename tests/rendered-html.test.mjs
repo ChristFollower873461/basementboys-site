@@ -36,7 +36,8 @@ test("server-renders the finished Basement Boys homepage", async () => {
   assert.match(html, /Robotics Sandbox/);
   assert.match(html, /Drip Council/);
   assert.match(html, /CodexVault/);
-  assert.match(html, /03 featured repos/);
+  assert.match(html, /Pjario Staltman/);
+  assert.match(html, /04 featured repos/);
   assert.match(html, /License it clearly\./);
   assert.match(html, /github\.com\/ChristFollower873461\/robotics-sandbox-spec/);
   assert.match(html, /https:\/\/robotics\.basementboys\.org/);
@@ -52,6 +53,9 @@ test("server-renders the finished Basement Boys homepage", async () => {
     /href="https:\/\/vault\.basementboys\.org"[^>]*aria-label="Open the live CodexVault"/,
   );
   assert.match(html, /safe browser walkthrough/i);
+  assert.match(html, /github\.com\/ChristFollower873461\/pjario-staltman/);
+  assert.match(html, /small operating system for agent-built software/i);
+  assert.doesNotMatch(html, /aria-label="Open the live Pjario Staltman"/);
   assert.match(html, /\/bb-mark\.svg/);
   assert.doesNotMatch(html, /src="\/logo\.svg"/);
   assert.match(html, /data-agent="site-summary"/);
