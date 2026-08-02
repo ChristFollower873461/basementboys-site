@@ -23,8 +23,8 @@ const projects = [
     type: "Rust / Tauri / React",
     status: "MIT",
     sourceHref: "https://github.com/ChristFollower873461/codexvault",
-    liveHref: null,
-    copy: "A local-first encrypted vault for AI-provider credentials, built around Argon2id, AES-256-GCM, deliberate exports, and an honest security boundary.",
+    liveHref: "https://vault.basementboys.org",
+    copy: "A local-first encrypted vault for AI-provider credentials, with a safe browser walkthrough, deterministic exports, and an honest desktop security boundary.",
   },
 ];
 
