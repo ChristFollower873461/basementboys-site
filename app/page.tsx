@@ -14,7 +14,7 @@ const projects = [
     type: "JS / Rust / Python",
     status: "MIT",
     sourceHref: "https://github.com/ChristFollower873461/dripcouncil",
-    liveHref: null,
+    liveHref: "https://dripcouncil.org",
     copy: "A public browser-agent field lab with inspectable cases, a Python observatory lens, and a real Rust/WebAssembly boundary validator.",
   },
   {

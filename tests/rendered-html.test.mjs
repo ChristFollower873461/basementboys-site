@@ -42,6 +42,10 @@ test("server-renders the finished Basement Boys homepage", async () => {
   assert.match(html, /https:\/\/robotics\.basementboys\.org/);
   assert.match(html, /source-backed robot decision workbench/i);
   assert.match(html, /github\.com\/ChristFollower873461\/dripcouncil/);
+  assert.match(
+    html,
+    /href="https:\/\/dripcouncil\.org"[^>]*aria-label="Open the live Drip Council"/,
+  );
   assert.match(html, /\/bb-mark\.svg/);
   assert.doesNotMatch(html, /src="\/logo\.svg"/);
   assert.match(html, /data-agent="site-summary"/);
