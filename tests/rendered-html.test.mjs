@@ -54,7 +54,9 @@ test("server-renders the finished Basement Boys homepage", async () => {
   );
   assert.match(html, /safe browser walkthrough/i);
   assert.match(html, /github\.com\/ChristFollower873461\/pjario-staltman/);
-  assert.match(html, /small operating system for agent-built software/i);
+  assert.match(html, /compact operating system for agent-built software/i);
+  assert.match(html, /Quiet Aggregate/);
+  assert.match(html, /independently repeated, verified findings/i);
   assert.doesNotMatch(html, /aria-label="Open the live Pjario Staltman"/);
   assert.match(html, /\/bb-mark\.svg/);
   assert.doesNotMatch(html, /src="\/logo\.svg"/);

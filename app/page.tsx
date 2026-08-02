@@ -32,7 +32,7 @@ const projects = [
     type: "Python / Make / Markdown",
     status: "MIT",
     sourceHref: "https://github.com/ChristFollower873461/pjario-staltman",
-    copy: "A small operating system for agent-built software: scoped tickets, planning briefs, auditable proof, staff review, and a bundled frontend-quality profile.",
+    copy: "A compact operating system for agent-built software: scoped work, auditable proof, staff review, and Quiet Aggregate—a deterministic loop that turns independently repeated, verified findings into proposed guardrails.",
   },
 ];
 
