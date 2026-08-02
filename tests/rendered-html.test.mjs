@@ -46,6 +46,12 @@ test("server-renders the finished Basement Boys homepage", async () => {
     html,
     /href="https:\/\/dripcouncil\.org"[^>]*aria-label="Open the live Drip Council"/,
   );
+  assert.match(html, /github\.com\/ChristFollower873461\/codexvault/);
+  assert.match(
+    html,
+    /href="https:\/\/vault\.basementboys\.org"[^>]*aria-label="Open the live CodexVault"/,
+  );
+  assert.match(html, /safe browser walkthrough/i);
   assert.match(html, /\/bb-mark\.svg/);
   assert.doesNotMatch(html, /src="\/logo\.svg"/);
   assert.match(html, /data-agent="site-summary"/);
