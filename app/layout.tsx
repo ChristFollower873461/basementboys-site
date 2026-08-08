@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og.png",
+        url: "/basement-boys-social.png",
         width: 1200,
         height: 630,
         type: "image/png",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
       "Open-source tools, experiments, and reference projects worth reading, running, and remixing.",
     images: [
       {
-        url: "/og.png",
+        url: "/basement-boys-social.png",
         alt: "Basement Boys — open-source tools, experiments, and reference projects.",
       },
     ],
