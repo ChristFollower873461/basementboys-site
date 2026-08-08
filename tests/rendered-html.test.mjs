@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import test from "node:test";
 
 async function fetchBuilt(path = "/", accept = "text/html") {
@@ -64,6 +64,62 @@ test("server-renders the finished Basement Boys homepage", async () => {
   assert.match(html, /\/\.well-known\/agent\.json/);
   assert.doesNotMatch(html, /pitch deck/i);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
+});
+
+test("publishes complete social preview and icon metadata", async () => {
+  const response = await fetchBuilt();
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(
+    html,
+    /<link rel="canonical" href="https:\/\/basementboys\.org\/"\s*\/?>/i,
+  );
+  assert.match(
+    html,
+    /<meta property="og:image" content="https:\/\/basementboys\.org\/og\.png"\s*\/?>/i,
+  );
+  assert.match(html, /<meta property="og:image:width" content="1200"\s*\/?>/i);
+  assert.match(html, /<meta property="og:image:height" content="630"\s*\/?>/i);
+  assert.match(html, /<meta property="og:image:type" content="image\/png"\s*\/?>/i);
+  assert.match(
+    html,
+    /<meta property="og:image:alt" content="Basement Boys — open-source tools, experiments, and reference projects\."\s*\/?>/i,
+  );
+  assert.match(
+    html,
+    /<meta name="twitter:card" content="summary_large_image"\s*\/?>/i,
+  );
+  assert.match(
+    html,
+    /<meta name="twitter:image" content="https:\/\/basementboys\.org\/og\.png"\s*\/?>/i,
+  );
+  assert.match(
+    html,
+    /<meta name="twitter:image:alt" content="Basement Boys — open-source tools, experiments, and reference projects\."\s*\/?>/i,
+  );
+  assert.match(
+    html,
+    /<link rel="icon" href="https:\/\/basementboys\.org\/favicon-32\.png" sizes="32x32" type="image\/png"\s*\/?>/i,
+  );
+  assert.match(
+    html,
+    /<link rel="icon" href="https:\/\/basementboys\.org\/favicon-16\.png" sizes="16x16" type="image\/png"\s*\/?>/i,
+  );
+  assert.match(
+    html,
+    /<link rel="apple-touch-icon" href="https:\/\/basementboys\.org\/apple-touch-icon\.png" sizes="180x180" type="image\/png"\s*\/?>/i,
+  );
+});
+
+test("keeps the social image inside the common preview-service budget", async () => {
+  const imageUrl = new URL("../public/og.png", import.meta.url);
+  const [png, imageStat] = await Promise.all([readFile(imageUrl), stat(imageUrl)]);
+
+  assert.deepEqual([...png.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
+  assert.equal(png.readUInt32BE(16), 1200);
+  assert.equal(png.readUInt32BE(20), 630);
+  assert.ok(imageStat.size < 1_000_000, `expected og.png below 1 MB; got ${imageStat.size} bytes`);
 });
 
 test("publishes the public agent card", async () => {
