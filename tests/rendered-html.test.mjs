@@ -77,7 +77,7 @@ test("publishes complete social preview and icon metadata", async () => {
   );
   assert.match(
     html,
-    /<meta property="og:image" content="https:\/\/basementboys\.org\/og\.png"\s*\/?>/i,
+    /<meta property="og:image" content="https:\/\/basementboys\.org\/basement-boys-social\.png"\s*\/?>/i,
   );
   assert.match(html, /<meta property="og:image:width" content="1200"\s*\/?>/i);
   assert.match(html, /<meta property="og:image:height" content="630"\s*\/?>/i);
@@ -92,7 +92,7 @@ test("publishes complete social preview and icon metadata", async () => {
   );
   assert.match(
     html,
-    /<meta name="twitter:image" content="https:\/\/basementboys\.org\/og\.png"\s*\/?>/i,
+    /<meta name="twitter:image" content="https:\/\/basementboys\.org\/basement-boys-social\.png"\s*\/?>/i,
   );
   assert.match(
     html,
@@ -113,13 +113,13 @@ test("publishes complete social preview and icon metadata", async () => {
 });
 
 test("keeps the social image inside the common preview-service budget", async () => {
-  const imageUrl = new URL("../public/og.png", import.meta.url);
+  const imageUrl = new URL("../public/basement-boys-social.png", import.meta.url);
   const [png, imageStat] = await Promise.all([readFile(imageUrl), stat(imageUrl)]);
 
   assert.deepEqual([...png.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
   assert.equal(png.readUInt32BE(16), 1200);
   assert.equal(png.readUInt32BE(20), 630);
-  assert.ok(imageStat.size < 1_000_000, `expected og.png below 1 MB; got ${imageStat.size} bytes`);
+  assert.ok(imageStat.size < 1_000_000, `expected social image below 1 MB; got ${imageStat.size} bytes`);
 });
 
 test("publishes the public agent card", async () => {
