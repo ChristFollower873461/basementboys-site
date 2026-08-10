@@ -2,13 +2,13 @@ import assert from "node:assert/strict";
 import { readFile, stat } from "node:fs/promises";
 import test from "node:test";
 
-async function fetchBuilt(path = "/", accept = "text/html") {
+async function fetchBuilt(path = "/", accept = "text/html", origin = "http://localhost") {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${path}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request(`http://localhost${path}`, {
+    new Request(new URL(path, origin), {
       headers: { accept },
     }),
     {
@@ -64,6 +64,39 @@ test("server-renders the finished Basement Boys homepage", async () => {
   assert.match(html, /\/\.well-known\/agent\.json/);
   assert.doesNotMatch(html, /pitch deck/i);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
+  assert.doesNotMatch(html, /href="http:\/\//i);
+});
+
+test("redirects production traffic to the canonical HTTPS origin", async () => {
+  const insecure = await fetchBuilt("/projects?from=test", "text/html", "http://basementboys.org");
+  assert.equal(insecure.status, 308);
+  assert.equal(
+    insecure.headers.get("location"),
+    "https://basementboys.org/projects?from=test",
+  );
+
+  const www = await fetchBuilt("/", "text/html", "https://www.basementboys.org");
+  assert.equal(www.status, 308);
+  assert.equal(www.headers.get("location"), "https://basementboys.org/");
+});
+
+test("sets browser safety headers on public responses", async () => {
+  const response = await fetchBuilt("/", "text/html", "https://basementboys.org");
+  assert.equal(response.status, 200);
+  assert.equal(response.headers.get("x-content-type-options"), "nosniff");
+  assert.equal(response.headers.get("x-frame-options"), "DENY");
+  assert.equal(response.headers.get("referrer-policy"), "strict-origin-when-cross-origin");
+  assert.equal(
+    response.headers.get("strict-transport-security"),
+    "max-age=31536000; includeSubDomains",
+  );
+  assert.match(response.headers.get("permissions-policy") ?? "", /payment=\(\)/);
+
+  const csp = response.headers.get("content-security-policy") ?? "";
+  assert.match(csp, /default-src 'self'/);
+  assert.match(csp, /frame-ancestors 'none'/);
+  assert.match(csp, /object-src 'none'/);
+  assert.match(csp, /upgrade-insecure-requests/);
 });
 
 test("publishes complete social preview and icon metadata", async () => {

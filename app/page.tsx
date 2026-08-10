@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const projects = [
   {
     id: "OSS-001",
@@ -58,7 +60,7 @@ export default function Home() {
 
       <header className="site-header" data-agent="navigation">
         <a className="header-name" href="#top" aria-label="Basement Boys home">
-          <img src="/bb-mark.svg" alt="" width="22" height="22" />
+          <Image src="/bb-mark.svg" alt="" width={22} height={22} unoptimized />
           <span>Basement Boys</span>
         </a>
         <p>Dev group / for fun</p>
@@ -84,7 +86,7 @@ export default function Home() {
             <span>Boys</span>
           </h1>
           <div className="hero-stamp" aria-label="Basement Boys mark">
-            <img src="/bb-mark.svg" alt="" width="160" height="160" />
+            <Image src="/bb-mark.svg" alt="" width={160} height={160} unoptimized />
           </div>
         </div>
 
