@@ -20,12 +20,16 @@ npm run dev
 ## Verification
 
 ```bash
+npm ci
 npm test
 npm run lint
+npm run audit:dependencies
 ```
 
 `npm test` builds the production Worker and checks the rendered homepage plus
-the public machine-readable metadata.
+the public machine-readable metadata, canonical HTTPS redirects, and browser
+safety headers. The dependency audit fails on new advisories and documents the
+single pinned, build-only upstream parser exception in [`SECURITY.md`](SECURITY.md).
 
 ## Production
 
