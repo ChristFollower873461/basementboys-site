@@ -13,8 +13,8 @@ not a public issue.
   protections.
 - Project and live links use HTTPS. New external-tab links must preserve
   `rel="noreferrer"`.
-- The site does not accept visitor-controlled images or files, and its image
-  optimizer can fetch only same-origin static assets.
+- The site does not accept visitor-controlled images or files, and it does not
+  expose an image-optimization or remote-fetch endpoint.
 - Deployment secrets and generated artifacts do not belong in Git history.
 
 ## Dependency Boundary
@@ -25,3 +25,8 @@ over maintainer-controlled repository images; it is not called by a visitor
 request, upload, or browser runtime path in this project. The production audit
 gate permits only those exact advisory IDs and versions, and fails on any other
 result so this exception cannot silently expand.
+
+The repository owner is responsible for this exception. It expires after
+2026-09-30 and must be removed by upgrading Vinext to a release that no longer
+pins the affected parser, or explicitly re-reviewed with fresh reachability
+evidence before that date.

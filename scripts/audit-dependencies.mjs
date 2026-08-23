@@ -10,6 +10,8 @@ const approvedVersions = new Map([
   ["node_modules/image-size", "2.0.2"],
   ["node_modules/vinext", "0.0.50"],
 ]);
+const exceptionOwner = "ChristFollower873461";
+const exceptionReviewDeadline = "2026-09-30T23:59:59Z";
 
 const audit = spawnSync("npm", ["audit", "--json"], {
   encoding: "utf8",
@@ -24,10 +26,31 @@ try {
   process.exit(1);
 }
 
+if (
+  audit.signal ||
+  audit.status === null ||
+  audit.status > 1 ||
+  report.error ||
+  !report.metadata?.vulnerabilities ||
+  !report.vulnerabilities ||
+  typeof report.vulnerabilities !== "object"
+) {
+  console.error("npm audit did not return a complete advisory report.");
+  console.error(audit.stderr || JSON.stringify(report.error ?? report, null, 2));
+  process.exit(1);
+}
+
 const vulnerabilities = Object.entries(report.vulnerabilities ?? {});
 if (vulnerabilities.length === 0) {
   console.log("Dependency audit passed with no advisories.");
   process.exit(0);
+}
+
+if (Date.now() > Date.parse(exceptionReviewDeadline)) {
+  console.error(
+    `The temporary image-size advisory exception owned by ${exceptionOwner} expired at ${exceptionReviewDeadline}.`,
+  );
+  process.exit(1);
 }
 
 const unexpectedPackages = vulnerabilities
@@ -66,5 +89,5 @@ if (
 }
 
 console.warn(
-  "Accepted two pinned upstream image-size advisories: vinext invokes this parser only during builds over maintainer-controlled repository images; no visitor upload or runtime parser path exists. Any package, advisory, or version change fails this gate for review.",
+  `Accepted two pinned upstream image-size advisories through ${exceptionReviewDeadline} (owner: ${exceptionOwner}): vinext invokes this parser only during builds over maintainer-controlled repository images; no visitor upload or runtime parser path exists. Any package, advisory, version, or deadline change fails this gate for review.`,
 );

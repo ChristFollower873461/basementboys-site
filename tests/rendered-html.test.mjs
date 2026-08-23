@@ -65,6 +65,17 @@ test("server-renders the finished Basement Boys homepage", async () => {
   assert.doesNotMatch(html, /pitch deck/i);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
   assert.doesNotMatch(html, /href="http:\/\//i);
+  assert.doesNotMatch(html, /\/_vinext\/image/);
+});
+
+test("does not expose the unused image optimization endpoint", async () => {
+  const response = await fetchBuilt(
+    "/_vinext/image?url=%2Fbb-mark.svg&w=64&q=75",
+    "image/avif",
+    "https://basementboys.org",
+  );
+  assert.equal(response.status, 404);
+  assert.equal(response.headers.get("location"), null);
 });
 
 test("redirects production traffic to the canonical HTTPS origin", async () => {
@@ -86,9 +97,10 @@ test("sets browser safety headers on public responses", async () => {
   assert.equal(response.headers.get("x-content-type-options"), "nosniff");
   assert.equal(response.headers.get("x-frame-options"), "DENY");
   assert.equal(response.headers.get("referrer-policy"), "strict-origin-when-cross-origin");
+  assert.equal(response.headers.get("cross-origin-opener-policy"), "same-origin");
   assert.equal(
     response.headers.get("strict-transport-security"),
-    "max-age=31536000; includeSubDomains",
+    "max-age=300",
   );
   assert.match(response.headers.get("permissions-policy") ?? "", /payment=\(\)/);
 
