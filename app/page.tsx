@@ -1,4 +1,4 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element -- vinext's next/image shim breaks hydration. */
 
 const projects = [
   {
@@ -36,6 +36,18 @@ const projects = [
     sourceHref: "https://github.com/ChristFollower873461/pjario-staltman",
     copy: "A compact operating system for agent-built software: scoped work, auditable proof, staff review, and Quiet Aggregate—a deterministic loop that turns independently repeated, verified findings into proposed guardrails.",
   },
+  {
+    id: "OSS-005",
+    title: "Sleeper Draft Command Center",
+    type: "Chrome MV3 / JavaScript",
+    status: "MIT",
+    sourceHref: "https://github.com/ChristFollower873461/sleeper-draft-command-center",
+    liveHref:
+      "https://github.com/ChristFollower873461/sleeper-draft-command-center/blob/main/docs/install-github-beta.md",
+    liveLabel: "Install beta",
+    liveAriaLabel: "Open the Sleeper Draft Command Center beta install guide",
+    copy: "Build or import personal rankings, then carry them into read-only live and manual Sleeper draft rooms—local-first, inspectable, and incapable of submitting a pick.",
+  },
 ];
 
 const rules = [
@@ -60,7 +72,7 @@ export default function Home() {
 
       <header className="site-header" data-agent="navigation">
         <a className="header-name" href="#top" aria-label="Basement Boys home">
-          <Image src="/bb-mark.svg" alt="" width={22} height={22} unoptimized />
+          <img src="/bb-mark.svg" alt="" width="22" height="22" />
           <span>Basement Boys</span>
         </a>
         <p>Dev group / for fun</p>
@@ -86,7 +98,7 @@ export default function Home() {
             <span>Boys</span>
           </h1>
           <div className="hero-stamp" aria-label="Basement Boys mark">
-            <Image src="/bb-mark.svg" alt="" width={160} height={160} unoptimized />
+            <img src="/bb-mark.svg" alt="" width="160" height="160" />
           </div>
         </div>
 
@@ -104,7 +116,7 @@ export default function Home() {
       </section>
 
       <div className="stats-bar" aria-label="Basement Boys statistics">
-        <span>04 featured repos</span>
+        <span>05 featured repos</span>
         <span>MIT licensed</span>
         <span>Rust + JS + Python</span>
         <span>Source in public</span>
@@ -163,9 +175,12 @@ export default function Home() {
                       href={project.liveHref}
                       target="_blank"
                       rel="noreferrer"
-                      aria-label={`Open the live ${project.title}`}
+                      aria-label={
+                        project.liveAriaLabel ?? `Open the live ${project.title}`
+                      }
                     >
-                      Live <span aria-hidden="true">↗</span>
+                      {project.liveLabel ?? "Live"}{" "}
+                      <span aria-hidden="true">↗</span>
                     </a>
                   ) : null}
                   <a
