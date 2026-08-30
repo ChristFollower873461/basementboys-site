@@ -37,7 +37,8 @@ test("server-renders the finished Basement Boys homepage", async () => {
   assert.match(html, /Drip Council/);
   assert.match(html, /CodexVault/);
   assert.match(html, /Pjario Staltman/);
-  assert.match(html, /04 featured repos/);
+  assert.match(html, /Sleeper Draft Command Center/);
+  assert.match(html, /05 featured repos/);
   assert.match(html, /License it clearly\./);
   assert.match(html, /github\.com\/ChristFollower873461\/robotics-sandbox-spec/);
   assert.match(html, /https:\/\/robotics\.basementboys\.org/);
@@ -58,6 +59,17 @@ test("server-renders the finished Basement Boys homepage", async () => {
   assert.match(html, /Quiet Aggregate/);
   assert.match(html, /independently repeated, verified findings/i);
   assert.doesNotMatch(html, /aria-label="Open the live Pjario Staltman"/);
+  assert.match(
+    html,
+    /github\.com\/ChristFollower873461\/sleeper-draft-command-center/,
+  );
+  assert.match(html, /Chrome MV3 \/ JavaScript/);
+  assert.match(html, /read-only live and manual Sleeper draft rooms/i);
+  assert.match(
+    html,
+    /aria-label="Open the Sleeper Draft Command Center beta install guide"/,
+  );
+  assert.match(html, /Install beta/);
   assert.match(html, /\/bb-mark\.svg/);
   assert.doesNotMatch(html, /src="\/logo\.svg"/);
   assert.match(html, /data-agent="site-summary"/);
