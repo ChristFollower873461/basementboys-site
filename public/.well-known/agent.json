@@ -10,8 +10,23 @@
   },
   "public_routes": [
     "/",
+    "/sleeper-draft-command-center",
     "/robots.txt",
     "/sitemap.xml",
     "/.well-known/agent.json"
+  ],
+  "featured_projects": [
+    {
+      "name": "Sleeper Draft Command Center",
+      "url": "https://basementboys.org/sleeper-draft-command-center",
+      "source": "https://github.com/ChristFollower873461/sleeper-draft-command-center",
+      "release": "https://github.com/ChristFollower873461/sleeper-draft-command-center/releases/tag/v0.3.0-beta.1",
+      "license": "MIT",
+      "safety": {
+        "read_only": true,
+        "local_storage": true,
+        "project_backend": false
+      }
+    }
   ]
 }

@@ -67,9 +67,10 @@ test("server-renders the finished Basement Boys homepage", async () => {
   assert.match(html, /read-only live and manual Sleeper draft rooms/i);
   assert.match(
     html,
-    /aria-label="Open the Sleeper Draft Command Center beta install guide"/,
+    /aria-label="Open the Sleeper Draft Command Center project page"/,
   );
-  assert.match(html, /Install beta/);
+  assert.match(html, /Explore \+ install/);
+  assert.match(html, /href="\/sleeper-draft-command-center"/);
   assert.match(html, /\/bb-mark\.svg/);
   assert.doesNotMatch(html, /src="\/logo\.svg"/);
   assert.match(html, /data-agent="site-summary"/);
@@ -78,6 +79,32 @@ test("server-renders the finished Basement Boys homepage", async () => {
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/i);
   assert.doesNotMatch(html, /href="http:\/\//i);
   assert.doesNotMatch(html, /\/_vinext\/image/);
+});
+
+test("publishes a searchable Sleeper Draft Command Center project page", async () => {
+  const response = await fetchBuilt(
+    "/sleeper-draft-command-center",
+    "text/html",
+    "https://basementboys.org",
+  );
+  assert.equal(response.status, 200);
+  const html = await response.text();
+
+  assert.match(html, /<title>Sleeper Draft Command Center — Basement Boys<\/title>/i);
+  assert.match(
+    html,
+    /<link rel="canonical" href="https:\/\/basementboys\.org\/sleeper-draft-command-center"\s*\/?>/i,
+  );
+  assert.match(html, /Your rankings, live room context, and an offline board/i);
+  assert.match(html, /300 ms/);
+  assert.match(html, /never submits a pick/i);
+  assert.match(html, /future keepers/i);
+  assert.match(html, /traded picks/i);
+  assert.match(html, /v0\.3\.0-beta\.1/);
+  assert.match(html, /application\/ld\+json/);
+  assert.match(html, /"@type":"SoftwareApplication"/);
+  assert.match(html, /src="\/sleeper-draft-command-center\.png"/);
+  assert.doesNotMatch(html, /href="http:\/\//i);
 });
 
 test("does not expose the unused image optimization endpoint", async () => {
@@ -179,6 +206,18 @@ test("keeps the social image inside the common preview-service budget", async ()
   assert.ok(imageStat.size < 1_000_000, `expected social image below 1 MB; got ${imageStat.size} bytes`);
 });
 
+test("sitemap exposes the Sleeper Draft Command Center page", async () => {
+  const sitemap = await readFile(
+    new URL("../dist/client/sitemap.xml", import.meta.url),
+    "utf8",
+  );
+  assert.match(
+    sitemap,
+    /<loc>https:\/\/basementboys\.org\/sleeper-draft-command-center<\/loc>/,
+  );
+  assert.match(sitemap, /<lastmod>2026-09-02<\/lastmod>/);
+});
+
 test("publishes the public agent card", async () => {
   const file = await readFile(
     new URL("../dist/client/.well-known/agent.json", import.meta.url),
@@ -191,8 +230,12 @@ test("publishes the public agent card", async () => {
   assert.equal(payload.safety.automated_write_endpoint, false);
   assert.deepEqual(payload.public_routes, [
     "/",
+    "/sleeper-draft-command-center",
     "/robots.txt",
     "/sitemap.xml",
     "/.well-known/agent.json",
   ]);
+  assert.equal(payload.featured_projects[0].name, "Sleeper Draft Command Center");
+  assert.equal(payload.featured_projects[0].safety.read_only, true);
+  assert.equal(payload.featured_projects[0].safety.project_backend, false);
 });

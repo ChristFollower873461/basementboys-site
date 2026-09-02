@@ -42,11 +42,10 @@ const projects = [
     type: "Chrome MV3 / JavaScript",
     status: "MIT",
     sourceHref: "https://github.com/ChristFollower873461/sleeper-draft-command-center",
-    liveHref:
-      "https://github.com/ChristFollower873461/sleeper-draft-command-center/blob/main/docs/install-github-beta.md",
-    liveLabel: "Install beta",
-    liveAriaLabel: "Open the Sleeper Draft Command Center beta install guide",
-    copy: "Build or import personal rankings, then carry them into read-only live and manual Sleeper draft rooms—local-first, inspectable, and incapable of submitting a pick.",
+    liveHref: "/sleeper-draft-command-center",
+    liveLabel: "Explore + install",
+    liveAriaLabel: "Open the Sleeper Draft Command Center project page",
+    copy: "Build or import personal rankings, then carry them into fast read-only live and manual Sleeper draft rooms. Version 0.3 adds tighter sync, keeper-safe signals, and traded-pick turns.",
   },
 ];
 
