@@ -390,7 +390,8 @@ a {
   border-top: 0;
 }
 
-.project-row:hover {
+.project-row:hover,
+.project-row:focus-within {
   background: var(--ink);
   color: var(--bone);
 }
@@ -429,7 +430,8 @@ a {
   transition: color 150ms ease;
 }
 
-.project-row:hover .project-name p {
+.project-row:hover .project-name p,
+.project-row:focus-within .project-name p {
   color: #aaa69b;
 }
 
@@ -459,8 +461,8 @@ a {
   color: var(--ink);
 }
 
-.project-source:hover,
-.project-source:focus-visible {
+.project-source:not(.project-live):hover,
+.project-source:not(.project-live):focus-visible {
   color: var(--signal);
 }
 

@@ -5,7 +5,8 @@ import Link from "next/link";
 
 const repository =
   "https://github.com/ChristFollower873461/sleeper-draft-command-center";
-const release = `${repository}/releases/tag/v0.3.0-beta.1`;
+const releaseVersion = "0.3.0-beta.1";
+const release = `${repository}/releases/tag/v${releaseVersion}`;
 const installGuide = `${repository}/blob/main/docs/install-github-beta.md`;
 
 export const metadata: Metadata = {
@@ -45,7 +46,7 @@ const structuredData = {
   name: "Sleeper Draft Command Center",
   applicationCategory: "SportsApplication",
   operatingSystem: "Chrome",
-  softwareVersion: "0.3.0",
+  softwareVersion: releaseVersion,
   isAccessibleForFree: true,
   description:
     "An open-source Chrome extension for personal rankings and read-only Sleeper draft intelligence.",

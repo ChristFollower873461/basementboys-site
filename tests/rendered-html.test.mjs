@@ -70,7 +70,9 @@ test("server-renders the finished Basement Boys homepage", async () => {
     /aria-label="Open the Sleeper Draft Command Center project page"/,
   );
   assert.match(html, /Explore \+ install/);
-  assert.match(html, /href="\/sleeper-draft-command-center"/);
+  const localProjectLink = html.match(/<a[^>]*href="\/sleeper-draft-command-center"[^>]*>/)?.[0];
+  assert.ok(localProjectLink, "homepage exposes the local project journey");
+  assert.doesNotMatch(localProjectLink, /target="_blank"/, "local navigation keeps browser history in this tab");
   assert.match(html, /\/bb-mark\.svg/);
   assert.doesNotMatch(html, /src="\/logo\.svg"/);
   assert.match(html, /data-agent="site-summary"/);
@@ -102,7 +104,12 @@ test("publishes a searchable Sleeper Draft Command Center project page", async (
   assert.match(html, /traded picks/i);
   assert.match(html, /v0\.3\.0-beta\.1/);
   assert.match(html, /application\/ld\+json/);
-  assert.match(html, /"@type":"SoftwareApplication"/);
+  const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
+  assert.ok(jsonLd);
+  const application = JSON.parse(jsonLd);
+  assert.equal(application["@type"], "SoftwareApplication");
+  assert.equal(new URL(application.downloadUrl).pathname.split("/").at(-1), `v${application.softwareVersion}`);
+  assert.equal(application.softwareVersion, "0.3.0-beta.1");
   assert.match(html, /src="\/sleeper-draft-command-center\.png"/);
   assert.doesNotMatch(html, /href="http:\/\//i);
 });

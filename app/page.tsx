@@ -172,14 +172,14 @@ export default function Home() {
                     <a
                       className="project-source project-live"
                       href={project.liveHref}
-                      target="_blank"
-                      rel="noreferrer"
+                      target={project.liveHref.startsWith("/") ? undefined : "_blank"}
+                      rel={project.liveHref.startsWith("/") ? undefined : "noreferrer"}
                       aria-label={
                         project.liveAriaLabel ?? `Open the live ${project.title}`
                       }
                     >
                       {project.liveLabel ?? "Live"}{" "}
-                      <span aria-hidden="true">↗</span>
+                      <span aria-hidden="true">{project.liveHref.startsWith("/") ? "→" : "↗"}</span>
                     </a>
                   ) : null}
                   <a
