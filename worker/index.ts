@@ -65,6 +65,14 @@ const worker = {
       return secureResponse(new Response("Not found", { status: 404 }));
     }
 
+    // Keep static-file precedence inside the redirect/header boundary. Vinext's
+    // public-file signals do not include generated client JavaScript and CSS.
+    if (env.ASSETS && (request.method === "GET" || request.method === "HEAD")) {
+      const asset = await env.ASSETS.fetch(request);
+      if (asset.status !== 404) return secureResponse(asset);
+      await asset.body?.cancel();
+    }
+
     return secureResponse(await handler.fetch(request, env, ctx));
   },
 };

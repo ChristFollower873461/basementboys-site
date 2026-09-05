@@ -8,5 +8,9 @@ const config = JSON.parse(await fs.readFile(configPath, "utf8"));
 
 delete config.legacy_env;
 
+// Static file hits must pass through the canonical redirect and safety headers.
+// The Worker serves files through ASSETS before falling back to Vinext routes.
+config.assets = { ...config.assets, binding: "ASSETS", run_worker_first: true };
+
 await fs.writeFile(configPath, `${JSON.stringify(config)}\n`);
 console.log("Prepared the generated Worker configuration for Cloudflare.");

@@ -12,8 +12,10 @@ The public Basement Boys open-source project showcase at
 
 ## Local development
 
+Use Node.js 22.13 or newer; CI verifies the Node 22 family.
+
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -21,15 +23,17 @@ npm run dev
 
 ```bash
 npm ci
-npm test
 npm run lint
 npm run audit:dependencies
+npm test
 ```
 
 `npm test` builds the production Worker and checks the rendered homepage plus
 the public machine-readable metadata, canonical HTTPS redirects, and browser
 safety headers. The dependency audit fails on new advisories and documents the
 single pinned, build-only upstream parser exception in [`SECURITY.md`](SECURITY.md).
+The test suite also verifies deployment gate ordering with isolated command
+stubs, without uploading a Worker or contacting a Cloudflare account.
 
 ## Production
 
@@ -37,10 +41,11 @@ single pinned, build-only upstream parser exception in [`SECURITY.md`](SECURITY.
 npm run deploy:cloudflare
 ```
 
-That command verifies the application, uploads the built Worker and assets to
-Cloudflare, and binds the `basementboys.org/*` and `www.basementboys.org/*`
-production routes. The routes intentionally preserve the zone's existing
-proxied DNS records.
+That command runs lint, the dependency audit, and the full build/test suite
+before uploading the built Worker and assets to Cloudflare. Any failed gate
+stops the command before the upload. A successful deployment binds the
+`basementboys.org/*` and `www.basementboys.org/*` production routes. The routes
+intentionally preserve the zone's existing proxied DNS records.
 
 ## Hosting rule
 
