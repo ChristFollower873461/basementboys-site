@@ -19,14 +19,18 @@ not a public issue.
 
 ## Dependency Boundary
 
-`vinext@0.0.50` currently pins `image-size@2.0.2`, which has two denial-of-service
-advisories without a patched release. Vinext invokes that parser during builds
-over maintainer-controlled repository images; it is not called by a visitor
-request, upload, or browser runtime path in this project. The production audit
-gate permits only those exact advisory IDs and versions, and fails on any other
-result so this exception cannot silently expand.
+The dependency audit has no advisory exceptions. Both CI and the deployment
+command require a complete, successful `npm audit` report with zero advisories;
+a failed or incomplete audit stops deployment.
 
-The repository owner is responsible for this exception. It expires after
-2026-09-30 and must be removed by upgrading Vinext to a release that no longer
-pins the affected parser, or explicitly re-reviewed with fresh reachability
-evidence before that date.
+`vinext@0.0.50` declares `image-size@2.0.2`. An exact override installs the patched
+`image-size@2.0.3` until the framework can be upgraded without the old parser pin.
+That release fixes [GHSA-5p2g-fcmc-qvqq](https://github.com/advisories/GHSA-5p2g-fcmc-qvqq)
+and [GHSA-w3rx-r6r6-pgpr](https://github.com/advisories/GHSA-w3rx-r6r6-pgpr), so the
+former September 30 exception is removed. The parser is used during builds over
+maintainer-controlled repository images. Visitor uploads and runtime image
+optimization remain unavailable.
+
+The existing Sharp override requires `0.35.4`, which includes the patched native
+image libraries. Keep dependency lockfiles and native packages consistent when
+updating these overrides, and rerun the generated Worker and visit-safety checks.
