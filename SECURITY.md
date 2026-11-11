@@ -31,6 +31,15 @@ former September 30 exception is removed. The parser is used during builds over
 maintainer-controlled repository images. Visitor uploads and runtime image
 optimization remain unavailable.
 
-The existing Sharp override requires `0.35.4`, which includes the patched native
-image libraries. Keep dependency lockfiles and native packages consistent when
-updating these overrides, and rerun the generated Worker and visit-safety checks.
+The Sharp override requires `0.35.5`, including the librsvg security fix.
+Additional exact overrides patch dependencies pinned by the current tooling:
+
+- `undici@7.30.1` replaces Miniflare's vulnerable `7.29.0` pin without changing
+  the Cloudflare tooling or the runtime framework.
+- `satori@0.33.5` fixes the SVG advisory without upgrading vinext from `0.0.50`
+  to the breaking `1.x` line. Its pinned `fflate` is patched to `0.7.5`.
+- Vulnerable `minimatch` versions from `7` through `11.0.0` are overridden to
+  `11.0.1` for the lint tooling. The unaffected `3.x` copies remain unchanged.
+
+Keep dependency lockfiles and native packages consistent when updating these
+overrides, and rerun the generated Worker and visit-safety checks.
