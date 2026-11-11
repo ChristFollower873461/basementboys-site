@@ -30,8 +30,8 @@ npm test
 
 `npm test` builds the production Worker and checks the rendered homepage plus
 the public machine-readable metadata, canonical HTTPS redirects, and browser
-safety headers. The dependency audit fails on new advisories and documents the
-single pinned, build-only upstream parser exception in [`SECURITY.md`](SECURITY.md).
+safety headers. The dependency audit requires zero advisories; patched transitive overrides are
+documented in [`SECURITY.md`](SECURITY.md).
 The test suite also verifies deployment gate ordering with isolated command
 stubs, without uploading a Worker or contacting a Cloudflare account.
 
